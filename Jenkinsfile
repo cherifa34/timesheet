@@ -1,6 +1,6 @@
 pipeline {
   environment{
-	registry = 'laabidi91/laabidi91'
+	registry = 'cherifa123/cherifa123'
 	registryCredential= 'dockerHub'
 	dockerImage = ''
  
@@ -10,8 +10,8 @@ pipeline {
   stage('Checkout GIT'){
     steps{
       echo 'Pulling...';
-      git branch: 'mohamedBranch',
-      url : 'https://github.com/laabidi/TimeSheetDev';
+      git branch: 'cherifaBranche',
+      url : 'https://github.com/cherifa34/timesheet.git';
     }
   }
          
