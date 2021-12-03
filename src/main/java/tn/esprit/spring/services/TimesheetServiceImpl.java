@@ -33,7 +33,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	EmployeRepository employeRepository;
 	
 	public int ajouterMission(Mission mission) {
-		missionRepository.save(mission);
+		mission = missionRepository.save(mission);
 		return mission.getId();
 	}
     
@@ -41,7 +41,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		Mission mission = missionRepository.findById(missionId).get();
 		Departement dep = deptRepoistory.findById(depId).get();
 		mission.setDepartement(dep);
-		missionRepository.save(mission);
+		mission = missionRepository.save(mission);
 		
 	}
 
