@@ -1,8 +1,10 @@
 package tn.esprit.spring.entities;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("MissionExterne")
 public class MissionExterne extends Mission {
 	
 	private static final long serialVersionUID = -3046278688391172322L;
