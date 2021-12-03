@@ -15,32 +15,35 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Mission;
-import tn.esprit.spring.services.EmployeServiceImpl;
-import tn.esprit.spring.services.EntrepriseServiceImpl;
 import tn.esprit.spring.services.IEmployeService;
 import tn.esprit.spring.services.IEntrepriseService;
 import tn.esprit.spring.services.ITimesheetService;
-import tn.esprit.spring.services.TimesheetServiceImpl;
 
 @RestController
 public class RestControlTimesheet {
 
 	private static final Logger L = Logger.getLogger(RestControlTimesheet.class);
 	@Autowired
-	EmployeServiceImpl iemployeservice;
+	IEmployeService iemployeservice;
 	@Autowired
-	EntrepriseServiceImpl ientrepriseservice;
+	IEntrepriseService ientrepriseservice;
 	@Autowired
-	TimesheetServiceImpl itimesheetservice;
+	ITimesheetService itimesheetservice;
 
 	// http://localhost:8081/SpringMVC/servlet/ajouterMission
 	// {"id":4,"name":"mamission", "description":"c ma mission"}
 	@PostMapping("/ajouterMission")
 	@ResponseBody
 	public int ajouterMission(@RequestBody Mission mission) {
+
+		L.info("In ajouterMission() : ");
 		try {
+			L.debug("I will run the ajouterMission method.");
 			itimesheetservice.ajouterMission(mission);
-			return mission.getId();
+			L.debug("I'm running the ajouterMission method.");
+			int id = mission.getId();
+			L.debug("I'm running the ajouterMission method. " + id);
+			return id;
 		} catch (Exception e) {
 			L.error("there is an error while executing : ajouterMission() : " + e);
 		}
@@ -51,8 +54,11 @@ public class RestControlTimesheet {
 	@PutMapping(value = "/affecterMissionADepartement/{idmission}/{iddept}")
 	public void affecterMissionADepartement(@PathVariable("idmission") int missionId,
 			@PathVariable("iddept") int depId) {
+		L.info("In affecterMissionADepartement() : ");
 		try {
+			L.debug("I will run the affecterMissionADepartement method.");
 			itimesheetservice.affecterMissionADepartement(missionId, depId);
+			L.debug("I'm runing the affecterMissionADepartement method.");
 		} catch (Exception e) {
 			L.error("there is an error while executing : affecterMissionADepartement() : " + e);
 		}
@@ -67,8 +73,11 @@ public class RestControlTimesheet {
 	public void ajouterTimesheet(@PathVariable("idmission") int missionId, @PathVariable("idemp") int employeId,
 			@PathVariable("dated") Date dateDebut, @PathVariable("datef") Date dateFin) {
 
+		L.info("In ajouterTimesheet() : ");
 		try {
+			L.debug("I will run the ajouterTimesheet method.");
 			itimesheetservice.ajouterTimesheet(missionId, employeId, dateDebut, dateFin);
+			L.debug("I'm runing the ajouterTimesheet method.");
 		} catch (Exception e) {
 			L.error("there is an error while executing : affecterMissionADepartement() : " + e);
 		}
@@ -78,33 +87,40 @@ public class RestControlTimesheet {
 	// http://localhost:8081/SpringMVC/servlet/affecterMissionADepartement/4/4
 	@PutMapping(value = "/validerTimesheet/{idmission}/{iddept}")
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
+		L.info("In validerTimesheet() : ");
 		try {
+			L.debug("I will run the validerTimesheet method.");
 			itimesheetservice.validerTimesheet(missionId, employeId, dateDebut, dateFin, validateurId);
+			L.debug("I'm runing the validerTimesheet method.");
 		} catch (Exception e) {
 			L.error("there is an error while executing : validerTimesheet() : " + e);
 		}
 
 	}
 
-	// URL : http://localhost:8081/SpringMVC/servlet/findAllMissionByEmployeJPQL/1
+	// URL :
+	// http://localhost:8081/SpringMVC/servlet/findAllMissionByEmployeJPQL/1
 	@GetMapping(value = "findAllMissionByEmployeJPQL/{idemp}")
 	@ResponseBody
 	public List<Mission> findAllMissionByEmployeJPQL(@PathVariable("idemp") int employeId) {
+		L.info("In findAllMissionByEmployeJPQL() : ");
 		try {
+			L.debug("I will run the validerTimesheet method.");
 			return itimesheetservice.findAllMissionByEmployeJPQL(employeId);
 		} catch (Exception e) {
 			L.error("there is an error while executing : findAllMissionByEmployeJPQL() : " + e);
 		}
 		return null;
-		
+
 	}
 
 	// URL : http://localhost:8081/SpringMVC/servlet/getAllEmployeByMission/1
 	@GetMapping(value = "getAllEmployeByMission/{idmission}")
 	@ResponseBody
 	public List<Employe> getAllEmployeByMission(@PathVariable("idmission") int missionId) {
+		L.info("In getAllEmployeByMission() : ");
 		try {
-			L.info("In getAllEmployeByMission() : ");
+			L.debug("I will run the getAllEmployeByMission method.");
 			return itimesheetservice.getAllEmployeByMission(missionId);
 		} catch (Exception e) {
 			L.error("there is an error while executing : getAllEmployeByMission() : " + e);
