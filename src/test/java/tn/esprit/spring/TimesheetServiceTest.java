@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Mission;
+import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.services.ITimesheetService;
 
 @SpringBootTest
@@ -15,6 +17,9 @@ class TimesheetServiceTest {
 
 	@Autowired
 	ITimesheetService timesheet;
+	
+	@Autowired
+	DepartementRepository deptRepoistory;
 
 	@Test
 	void contextLoads() {
@@ -27,5 +32,18 @@ class TimesheetServiceTest {
 		int id = timesheet.ajouterMission(m);
 		Assert.assertNotEquals(0, id);
 	}
+
+	/*@Test
+	public final void affecterMissionADepartementTest() {
+		Mission m = new Mission("Mission test for department", "Mission test for department");
+		int id_mission = timesheet.ajouterMission(m);
+		affecterMissionADepartementTest(); 
+		Departement d = new Departement("Departement test for mission");
+		deptRepoistory.save(d);
+		int id_departement = d.getId();
+		timesheet.affecterMissionADepartement(id_mission, id_departement);
+
+		Assert.assertEquals(id_mission, m.getDepartement().getId());
+	}*/
 
 }
