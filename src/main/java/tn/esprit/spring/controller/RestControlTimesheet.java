@@ -35,6 +35,7 @@ public class RestControlTimesheet {
 	@PostMapping("/ajouterMission")
 	@ResponseBody
 	public int ajouterMission(@RequestBody Mission mission) {
+		L.info("In ajouterMission() : ");
 		try {
 			itimesheetservice.ajouterMission(mission);
 			return mission.getId();
